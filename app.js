@@ -1,30 +1,17 @@
 const express = require("express");
+
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.get("/", (request, response) => {
+  response.send("<h2>Home page</h2>");
 });
 
-app.get("/contact", (req, res) => {
-  res.send("<h1>Contact page</h1>");
+app.get("/contacts", (request, response) => {
+  console.log(request.url);
+  console.log(request.method);
+  response.send("<h2>Contacts page</h2>");
 });
 
-app.use((req, res, next) => {
-  console.log("Наше проміжне ПЗ");
-  next();
-});
-
-app.get("/contact/:id", (req, res) => {
-  res.send(`<h1>Contact</h1> Параметр: ${req.params.id}`);
-});
-
-app.patch("/user/:userid", (req, res) => {
-  const id = req.params.userid;
-  // виконуємо необхідні дії
-});
-
-app.use(express.urlencoded({ extended: false }));
-
-app.listen(3000, () => {
-  console.log("Example app listening on port 3000!");
-});
+app.listen(3000, () =>
+  console.log("Server running. Use our API on port: 3000")
+);
